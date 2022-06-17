@@ -9,5 +9,7 @@
     <string name="unknown_error">Unknown error</string>
     <string name="unknown_http_error">Unknown HTTP error</string>
     <string name="log_into_your_account">Log into your account!</string>
+    <string name="please_make_sure_all_field_are_filled_in">Please make sure all fields are filled in</string>
+    <string name="please_make_sure_you_have_entered_correct_email">Please make sure you have entered correct email</string>
 
 </resources>

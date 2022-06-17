@@ -17,6 +17,7 @@ import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -45,10 +46,34 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideKeyAliases(app: Application): MasterKey = MasterKey.Builder(app, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideEncryptedSharedPreferences(
+        app: Application,
+        masterKey: MasterKey
+    ):SharedPreferences = EncryptedSharedPreferences.create(
+        app,
+        Constants.SHARED_PREF_NAME,
+        masterKey,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
+
+    @Singleton
+    @Provides
     fun provideLoginRepository(
         itemsApi: ItemsApi,
-        resourceProvider: ResourceProvider
-    ):LoginRepository = LoginRepositoryImp(itemsApi = itemsApi, resourceProvider)
+        resourceProvider: ResourceProvider,
+        sharedPreferences: SharedPreferences
+    ):LoginRepository = LoginRepositoryImp(
+        itemsApi = itemsApi,
+        resourceProvider = resourceProvider,
+        sharedPreferences = sharedPreferences
+    )
 
     @Singleton
     @Provides
@@ -57,22 +82,4 @@ object AppModule {
         resourceProvider: ResourceProvider
     ) = LogIn(loginRepository = loginRepository, resourceProvider = resourceProvider)
 
-    @Singleton
-    @Provides
-    fun provideKeyAliases(context: Context): MasterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-        .build()
-
-    @Singleton
-    @Provides
-    fun provideEncryptedSharedPreferences(
-        context: Context,
-        masterKey: MasterKey
-    ):SharedPreferences = EncryptedSharedPreferences.create(
-        context,
-        Constants.SHARED_PREF_NAME,
-        masterKey,
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
 }
