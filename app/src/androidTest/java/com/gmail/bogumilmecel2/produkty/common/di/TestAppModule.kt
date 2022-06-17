@@ -2,29 +2,61 @@ package com.gmail.bogumilmecel2.produkty.common.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.ComposeCustomNavigator
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
+import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
+import com.gmail.bogumilmecel2.produkty.common.util.Result
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.AccessToken
+import com.gmail.bogumilmecel2.produkty.feature_login.data.api.ItemsApi
+import com.gmail.bogumilmecel2.produkty.feature_login.data.repository.LoginRepositoryImp
+import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
+import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object TestAppModule {
 
-//    @Singleton
-//    @Provides
-//    fun provideContext() : Context =
+    @Singleton
+    @Provides
+    fun provideNavigator():Navigator = ComposeCustomNavigator()
 
     @Singleton
     @Provides
-    fun provideNavigator(): Navigator = ComposeCustomNavigator()
+    fun provideResourceProvider(app: Application):ResourceProvider = ResourceProvider(app)
 
     @Singleton
     @Provides
-    fun provideResourceProvider(app: Application): ResourceProvider = ResourceProvider(app)
+    fun provideLoginRepository(
+        itemsApi: ItemsApi,
+        resourceProvider: ResourceProvider,
+        sharedPreferences: SharedPreferences
+    ): LoginRepository = object : LoginRepository{
+        override suspend fun logIn(username: String, password: String): Result {
+            return Result.Success
+        }
+
+        override suspend fun saveAccessToken(accessToken: AccessToken): Result {
+            return Result.Success
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideLogInUseCase(
+        loginRepository: LoginRepository,
+        resourceProvider: ResourceProvider
+    ) = LogIn(loginRepository = loginRepository, resourceProvider = resourceProvider)
+
 }

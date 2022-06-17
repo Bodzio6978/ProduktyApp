@@ -2,6 +2,7 @@ package com.gmail.bogumilmecel2.produkty.feature_login.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -13,6 +14,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gmail.bogumilmecel2.produkty.R
@@ -79,7 +84,8 @@ fun LoginScreen(
                             imageVector = Icons.Default.AccountCircle,
                             contentDescription = emailState.hint
                         )
-                    }
+                    },
+                    singleLine = true
                 )
 
                 Spacer(modifier = Modifier.height(15.dp))
@@ -107,7 +113,14 @@ fun LoginScreen(
                             imageVector = Icons.Default.Lock,
                             contentDescription = passwordState.hint
                         )
-                    }
+                    },
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
+                    singleLine = true
                 )
 
                 Button(
