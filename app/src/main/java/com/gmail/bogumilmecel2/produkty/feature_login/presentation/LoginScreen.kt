@@ -25,13 +25,25 @@ fun LoginScreen(
     val emailState = viewModel.emailState.value
     val passwordState = viewModel.passwordState.value
 
+    val scaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(key1 = true) {
+        viewModel.snackbarState.collect {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = it,
+                duration = SnackbarDuration.Long
+            )
+        }
+    }
+
     Scaffold(
         topBar = {
             CustomToolbar(
-                title = "Log into your account!",
+                title = stringResource(id = R.string.log_into_your_account),
                 isBackArrowVisible = false
             )
-        }
+        },
+        scaffoldState = scaffoldState
     ) {
         Box(
             modifier = Modifier
@@ -63,10 +75,13 @@ fun LoginScreen(
                         disabledIndicatorColor = Color.Transparent
                     ),
                     leadingIcon = {
-                        Icon(imageVector = Icons.Default.AccountCircle, contentDescription = emailState.hint)
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = emailState.hint
+                        )
                     }
                 )
-                
+
                 Spacer(modifier = Modifier.height(15.dp))
 
                 TextField(
@@ -88,10 +103,13 @@ fun LoginScreen(
                         disabledIndicatorColor = Color.Transparent
                     ),
                     leadingIcon = {
-                        Icon(imageVector = Icons.Default.Lock, contentDescription = passwordState.hint)
+                        Icon(
+                            imageVector = Icons.Default.Lock,
+                            contentDescription = passwordState.hint
+                        )
                     }
                 )
-                
+
                 Button(
                     onClick = {
                         viewModel.onEvent(LoginEvent.ClickedSignIn)

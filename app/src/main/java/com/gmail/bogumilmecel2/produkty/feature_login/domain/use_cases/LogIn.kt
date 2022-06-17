@@ -16,14 +16,6 @@ class LogIn(
         email:String,
         password:String
     ):Result{
-        val resource = loginRepository.logIn(email,password)
-        Log.e("login use case", resource.toString())
-        return if (resource is Resource.Success){
-            Log.e("login use case",resource.data!!.toString())
-            Result.Success
-        }else{
-            Log.e("login use case", resource.uiText.toString())
-            Result.Error(resource.uiText!!)
-        }
+        return loginRepository.logIn(email,password)
     }
 }

@@ -2,8 +2,13 @@ package com.gmail.bogumilmecel2.produkty.common.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import androidx.security.crypto.MasterKeys
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.ComposeCustomNavigator
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
+import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
 import com.gmail.bogumilmecel2.produkty.feature_login.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.feature_login.data.repository.LoginRepositoryImp
@@ -48,6 +53,26 @@ object AppModule {
     @Singleton
     @Provides
     fun provideLogInUseCase(
-        loginRepository: LoginRepository
-    ) = LogIn(loginRepository = loginRepository)
+        loginRepository: LoginRepository,
+        resourceProvider: ResourceProvider
+    ) = LogIn(loginRepository = loginRepository, resourceProvider = resourceProvider)
+
+    @Singleton
+    @Provides
+    fun provideKeyAliases(context: Context): MasterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build()
+
+    @Singleton
+    @Provides
+    fun provideEncryptedSharedPreferences(
+        context: Context,
+        masterKey: MasterKey
+    ):SharedPreferences = EncryptedSharedPreferences.create(
+        context,
+        Constants.SHARED_PREF_NAME,
+        masterKey,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
 }

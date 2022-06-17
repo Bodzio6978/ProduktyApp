@@ -8,5 +8,6 @@
     <string name="the_email_or_password_is_incorrect">The email or password is incorrect</string>
     <string name="unknown_error">Unknown error</string>
     <string name="unknown_http_error">Unknown HTTP error</string>
+    <string name="log_into_your_account">Log into your account!</string>
 
 </resources>
