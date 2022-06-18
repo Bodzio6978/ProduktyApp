@@ -13,6 +13,7 @@ import com.gmail.bogumilmecel2.produkty.common.util.Screen
 import com.gmail.bogumilmecel2.produkty.common.util.extensions.asLifecycleAwareState
 import com.gmail.bogumilmecel2.produkty.feature_login.presentation.LoginScreen
 import com.gmail.bogumilmecel2.produkty.feature_items.presentation.ItemsScreen
+import com.gmail.bogumilmecel2.produkty.feature_splash.presentation.SplashScreen
 
 @Composable
 fun NavHostGraph(
@@ -36,18 +37,16 @@ fun NavHostGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.ItemsScreen.route
+        startDestination = Screen.SplashScreen.route
     ) {
-
         composable(route = Screen.LoginScreen.route){
             LoginScreen()
         }
-
         composable(route = Screen.ItemsScreen.route){
             ItemsScreen()
         }
-
-
+        composable(route = Screen.SplashScreen.route){
+            SplashScreen()
+        }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases
+package com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases
 
 import com.gmail.bogumilmecel2.produkty.R
 import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken

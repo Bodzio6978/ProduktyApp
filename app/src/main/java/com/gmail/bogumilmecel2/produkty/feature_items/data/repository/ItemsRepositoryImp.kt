@@ -2,18 +2,24 @@ package com.gmail.bogumilmecel2.produkty.feature_items.data.repository
 import android.content.SharedPreferences
 import android.util.Log
 import com.gmail.bogumilmecel2.produkty.R
+import com.gmail.bogumilmecel2.produkty.common.data.BoxStoreUtil
 import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
 import com.gmail.bogumilmecel2.produkty.common.util.*
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Data
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.object_box.ObjectBoxItem
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.repository.ItemsRepository
 import com.google.gson.Gson
+import io.objectbox.Box
+import io.objectbox.BoxStore
 import retrofit2.HttpException
 
 class ItemsRepositoryImp(
     private val sharedPreferences: SharedPreferences,
     private val resourceProvider: ResourceProvider,
-    private val itemsApi:ItemsApi
+    private val itemsApi:ItemsApi,
+    private val boxStoreUtil: BoxStoreUtil
 ): ItemsRepository {
 
     override suspend fun getAccessToken(): Resource<AccessToken> {
@@ -61,5 +67,24 @@ class ItemsRepositoryImp(
             Resource.Error(resourceProvider.getString(R.string.unknown_error))
         }
 
+    }
+
+    override suspend fun getObjectBoxItems(): Resource<List<ObjectBoxItem>> {
+        return try {
+            Resource.Success(data = boxStoreUtil.getBoxStore().boxFor(ObjectBoxItem::class.java).all)
+        }catch (e:Exception){
+            Resource.Error(uiText = resourceProvider.getString(R.string.unknown_error))
+        }
+    }
+
+    override suspend fun saveItemsToObjectBox(items: List<ObjectBoxItem>): Result {
+        return try {
+            boxStoreUtil.clearBoxStore()
+            boxStoreUtil.getBoxStore().boxFor(ObjectBoxItem::class.java).put(items)
+            Result.Success
+        }catch (e:Exception){
+            Log.e(TAG,e.message.toString())
+            Result.Error(resourceProvider.getString(R.string.unknown_error))
+        }
     }
 }

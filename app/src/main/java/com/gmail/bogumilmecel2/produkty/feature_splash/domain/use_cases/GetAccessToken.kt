@@ -1,4 +1,4 @@
-package com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases
+package com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases
 
 import android.content.SharedPreferences
 import com.gmail.bogumilmecel2.produkty.R

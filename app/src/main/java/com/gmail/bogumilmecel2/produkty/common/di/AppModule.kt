@@ -1,32 +1,33 @@
 package com.gmail.bogumilmecel2.produkty.common.di
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import androidx.security.crypto.MasterKeys
+import com.gmail.bogumilmecel2.produkty.common.data.BoxStoreUtil
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.ComposeCustomNavigator
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
 import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.feature_items.data.repository.ItemsRepositoryImp
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.object_box.MyObjectBox
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.repository.ItemsRepository
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.GetAccessToken
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.GetItems
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.ItemsUseCases
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.GetBoxStoreItems
+import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.GetAccessToken
+import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.GetItems
+import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.ItemsUseCases
 import com.gmail.bogumilmecel2.produkty.feature_login.data.repository.LoginRepositoryImp
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
+import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.SaveItemToObjectBox
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.objectbox.BoxStore
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -89,14 +90,21 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideBoxStoreUtil(app:Application):BoxStoreUtil = BoxStoreUtil(app)
+
+
+    @Singleton
+    @Provides
     fun provideItemsRepository(
         sharedPreferences: SharedPreferences,
         resourceProvider: ResourceProvider,
-        itemsApi: ItemsApi
+        itemsApi: ItemsApi,
+        boxStoreUtil: BoxStoreUtil
     ):ItemsRepository = ItemsRepositoryImp(
         sharedPreferences = sharedPreferences,
         resourceProvider = resourceProvider,
-        itemsApi = itemsApi
+        itemsApi = itemsApi,
+        boxStoreUtil = boxStoreUtil
     )
 
     @Singleton
@@ -104,9 +112,18 @@ object AppModule {
     fun provideItemsUseCases(
         itemsRepository: ItemsRepository,
         resourceProvider: ResourceProvider
-    ):ItemsUseCases = ItemsUseCases(
+    ): ItemsUseCases = ItemsUseCases(
         getItems = GetItems(itemsRepository = itemsRepository, resourceProvider = resourceProvider),
-        getAccessToken = GetAccessToken(itemsRepository = itemsRepository)
+        getAccessToken = GetAccessToken(itemsRepository = itemsRepository),
+        saveItemsToObjectBox = SaveItemToObjectBox(itemsRepository = itemsRepository)
     )
+
+    @Singleton
+    @Provides
+    fun provideGetBoxStoreItemsUseCase(
+        itemsRepository: ItemsRepository
+    ):GetBoxStoreItems = GetBoxStoreItems(itemsRepository = itemsRepository)
+
+
 
 }

@@ -32,13 +32,7 @@ fun ItemsScreen(
     }
 
     LaunchedEffect(key1 = true) {
-        viewModel.accessToken.collectLatest {
-            viewModel.getItems(it)
-        }
-    }
-
-    LaunchedEffect(key1 = true) {
-        viewModel.getAccessToken()
+        viewModel.getItems()
     }
 
     Scaffold(
