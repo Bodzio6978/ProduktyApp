@@ -1,27 +1,19 @@
 package com.gmail.bogumilmecel2.produkty.common.di
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.ComposeCustomNavigator
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
-import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
 import com.gmail.bogumilmecel2.produkty.common.util.Result
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.AccessToken
-import com.gmail.bogumilmecel2.produkty.feature_login.data.api.ItemsApi
-import com.gmail.bogumilmecel2.produkty.feature_login.data.repository.LoginRepositoryImp
+import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
+import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module

@@ -7,6 +7,9 @@ object NavigationActions {
     object ItemsScreen{
         fun itemsToLogin() = object : NavigationAction {
             override val destination = Screen.LoginScreen.route
+            override val navOptions: NavOptions = NavOptions.Builder()
+                .setPopUpTo(0, true)
+                .build()
         }
     }
 

@@ -11,5 +11,6 @@
     <string name="log_into_your_account">Log into your account!</string>
     <string name="please_make_sure_all_field_are_filled_in">Please make sure all fields are filled in</string>
     <string name="please_make_sure_you_have_entered_correct_email">Please make sure you have entered correct email</string>
+    <string name="the_token_has_expired_or_is_incorrect">The token has expired or is incorrect</string>
 
 </resources>

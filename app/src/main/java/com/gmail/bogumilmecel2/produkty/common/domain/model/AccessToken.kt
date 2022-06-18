@@ -1,4 +1,4 @@
-package com.gmail.bogumilmecel2.produkty.feature_items.domain.model
+package com.gmail.bogumilmecel2.produkty.common.domain.model
 
 @kotlinx.serialization.Serializable
 data class AccessToken(

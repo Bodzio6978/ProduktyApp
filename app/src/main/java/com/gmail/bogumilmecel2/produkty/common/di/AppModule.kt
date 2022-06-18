@@ -10,7 +10,12 @@ import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.ComposeCusto
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
-import com.gmail.bogumilmecel2.produkty.feature_login.data.api.ItemsApi
+import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
+import com.gmail.bogumilmecel2.produkty.feature_items.data.repository.ItemsRepositoryImp
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.repository.ItemsRepository
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.GetAccessToken
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.GetItems
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.ItemsUseCases
 import com.gmail.bogumilmecel2.produkty.feature_login.data.repository.LoginRepositoryImp
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
@@ -38,7 +43,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideItemsApi():ItemsApi = Retrofit.Builder()
+    fun provideItemsApi(): ItemsApi = Retrofit.Builder()
         .baseUrl("https://demo2.gopos.pl/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
@@ -81,5 +86,27 @@ object AppModule {
         loginRepository: LoginRepository,
         resourceProvider: ResourceProvider
     ) = LogIn(loginRepository = loginRepository, resourceProvider = resourceProvider)
+
+    @Singleton
+    @Provides
+    fun provideItemsRepository(
+        sharedPreferences: SharedPreferences,
+        resourceProvider: ResourceProvider,
+        itemsApi: ItemsApi
+    ):ItemsRepository = ItemsRepositoryImp(
+        sharedPreferences = sharedPreferences,
+        resourceProvider = resourceProvider,
+        itemsApi = itemsApi
+    )
+
+    @Singleton
+    @Provides
+    fun provideItemsUseCases(
+        itemsRepository: ItemsRepository,
+        resourceProvider: ResourceProvider
+    ):ItemsUseCases = ItemsUseCases(
+        getItems = GetItems(itemsRepository = itemsRepository, resourceProvider = resourceProvider),
+        getAccessToken = GetAccessToken(itemsRepository = itemsRepository)
+    )
 
 }
