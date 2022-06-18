@@ -1,7 +1,5 @@
 package com.gmail.bogumilmecel2.produkty.feature_items.presentation
 
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -10,8 +8,9 @@ import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
 import com.gmail.bogumilmecel2.produkty.common.navigation.nav_actions.NavigationActions
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.Resource
-import com.gmail.bogumilmecel2.produkty.common.util.TAG
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Data
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.ImageLink
+import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.ItemsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,8 +28,8 @@ class ItemsViewModel @Inject constructor(
     private val _accessToken = MutableSharedFlow<AccessToken>()
     val accessToken : SharedFlow<AccessToken> = _accessToken
 
-    private val _itemsState = mutableStateOf(Data())
-    val itemsState : State<Data> = _itemsState
+    private val _itemsState = mutableStateOf(emptyList<Item>())
+    val itemsState : State<List<Item>> = _itemsState
 
     private val _snackbarEvent = MutableSharedFlow<String>()
     val snackbarEvent : SharedFlow<String> = _snackbarEvent
@@ -56,7 +55,8 @@ class ItemsViewModel @Inject constructor(
             val itemsResource = itemsUseCases.getItems(accessToken)
 
             if (itemsResource is Resource.Success){
-                _itemsState.value = itemsResource.data!!
+                val items = itemsResource.data!!
+                _itemsState.value = items.data.sortedWith(compareBy(nullsLast()) { it.image_link })
             }else{
                 _snackbarEvent.emit(itemsResource.uiText.toString())
             }

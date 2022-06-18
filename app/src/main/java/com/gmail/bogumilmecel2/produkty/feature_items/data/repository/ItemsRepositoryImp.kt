@@ -49,6 +49,7 @@ class ItemsRepositoryImp(
             val data =  itemsApi.getItems(
                 accessToken = accessToken.access_token
             )
+            Log.e(TAG,data.data.toString())
             Resource.Success(data = data)
         }catch (e:HttpException){
             if (e.code()==401){
