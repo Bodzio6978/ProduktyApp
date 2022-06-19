@@ -113,7 +113,7 @@ object AppModule {
         itemsRepository: ItemsRepository,
         resourceProvider: ResourceProvider
     ): ItemsUseCases = ItemsUseCases(
-        getItems = GetItems(itemsRepository = itemsRepository, resourceProvider = resourceProvider),
+        getItems = GetItems(itemsRepository = itemsRepository),
         getAccessToken = GetAccessToken(itemsRepository = itemsRepository),
         saveItemsToObjectBox = SaveItemToObjectBox(itemsRepository = itemsRepository)
     )

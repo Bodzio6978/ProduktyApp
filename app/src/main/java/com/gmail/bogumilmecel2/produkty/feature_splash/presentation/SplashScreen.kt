@@ -1,6 +1,5 @@
 package com.gmail.bogumilmecel2.produkty.feature_splash.presentation
 
-import android.widget.Space
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -9,19 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gmail.bogumilmecel2.produkty.R
 import com.gmail.bogumilmecel2.produkty.common.presentation.ui.theme.Error
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SplashScreen(
     viewModel: SplashViewModel = hiltViewModel()
 ) {
-
     val splashState = viewModel.splashState.value
 
     LaunchedEffect(key1 = true) {
@@ -32,7 +28,6 @@ fun SplashScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-
 
         Column(
             modifier = Modifier
@@ -66,13 +61,7 @@ fun SplashScreen(
                 CircularProgressIndicator(
                     modifier = Modifier.size(32.dp)
                 )
-
             }
-
         }
-
-
     }
-
-
 }

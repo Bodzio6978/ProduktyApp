@@ -28,6 +28,7 @@ import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Tax
 fun ItemLayout(
     item: Item
 ) {
+    val hasItemImage:Boolean? = item.image_link?.small?.isNotBlank()
 
     Card(
         modifier = Modifier
@@ -46,7 +47,7 @@ fun ItemLayout(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                if (item.image_link != null) {
+                if (hasItemImage!=null) {
                     Image(
                         painter = rememberAsyncImagePainter(item.image_link.small),
                         contentDescription = item.name,
@@ -59,7 +60,7 @@ fun ItemLayout(
 
                 Column(
                     modifier = Modifier
-                        .padding(start = if (item.image_link != null) 10.dp else 0.dp)
+                        .padding(start = if (hasItemImage!=null) 10.dp else 0.dp)
                 ) {
 
                     Row(

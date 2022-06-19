@@ -59,7 +59,10 @@ class ItemsRepositoryImp(
             Resource.Success(data = data)
         }catch (e:HttpException){
             if (e.code()==401){
-                Resource.Error(resourceProvider.getString(R.string.the_token_has_expired_or_is_incorrect))
+                val result = refreshToken(accessToken.refresh_token)
+                if (result is Result.Error){
+                    Resource.Error(resourceProvider.getString(R.string.the_token_has_expired_or_is_incorrect))
+                }else getItems(accessToken)
             }else{
                 Resource.Error(resourceProvider.getString(R.string.unknown_error))
             }
