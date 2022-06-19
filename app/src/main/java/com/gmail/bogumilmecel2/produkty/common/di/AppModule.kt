@@ -108,8 +108,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideItemsUseCases(
-        itemsRepository: ItemsRepository,
-        resourceProvider: ResourceProvider
+        itemsRepository: ItemsRepository
     ): ItemsUseCases = ItemsUseCases(
         getItems = GetItems(itemsRepository = itemsRepository),
         getAccessToken = GetAccessToken(itemsRepository = itemsRepository),

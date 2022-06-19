@@ -18,7 +18,8 @@ import com.gmail.bogumilmecel2.produkty.feature_splash.presentation.SplashScreen
 @Composable
 fun NavHostGraph(
     navController: NavHostController = rememberNavController(),
-    navigator: Navigator
+    navigator: Navigator,
+    startDestination:String = Screen.SplashScreen.route
 ) {
 
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -37,7 +38,7 @@ fun NavHostGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route
+        startDestination = startDestination
     ) {
         composable(route = Screen.LoginScreen.route){
             LoginScreen()

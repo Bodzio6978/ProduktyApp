@@ -15,6 +15,7 @@ class LogIn(
         email:String,
         password:String
     ):Result{
+        println(email)
         if (email.isBlank()||password.isBlank()){
             return Result.Error(resourceProvider.getString(R.string.please_make_sure_all_field_are_filled_in))
         }

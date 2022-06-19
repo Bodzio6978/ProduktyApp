@@ -32,7 +32,7 @@ class ItemsViewModel @Inject constructor(
             if (resource is Resource.Error){
                 _snackbarEvent.emit(resource.uiText.toString())
             }else{
-                _itemsState.value = resource.data!!.sortedWith(compareBy(nullsLast()) { it.image_link })
+                _itemsState.value = resource.data!!.sortedWith(compareByDescending () { it.image_link })
             }
         }
     }

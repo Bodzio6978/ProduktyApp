@@ -131,6 +131,7 @@ fun LoginScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp, vertical = 40.dp)
                         .clip(RoundedCornerShape(50))
+                        .testTag(stringResource(id = R.string.sign_in))
                 ) {
                     Text(
                         text = stringResource(id = R.string.sign_in),

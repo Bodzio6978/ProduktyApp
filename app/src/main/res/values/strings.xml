@@ -17,5 +17,6 @@
     <string name="price">Price</string>
     <string name="gross">Gross</string>
     <string name="vat">VAT</string>
+    <string name="lazy_column">Lazy column</string>
 
 </resources>

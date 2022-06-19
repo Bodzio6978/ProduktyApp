@@ -7,10 +7,13 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gmail.bogumilmecel2.produkty.common.presentation.components.CustomToolbar
 import com.gmail.bogumilmecel2.produkty.feature_items.presentation.components.ItemLayout
 import kotlinx.coroutines.flow.collectLatest
+import com.gmail.bogumilmecel2.produkty.R
 
 @Composable
 fun ItemsScreen(
@@ -41,6 +44,7 @@ fun ItemsScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
+                .testTag(stringResource(id = R.string.lazy_column))
         ) {
             items(itemsState.size) {
                 ItemLayout(
