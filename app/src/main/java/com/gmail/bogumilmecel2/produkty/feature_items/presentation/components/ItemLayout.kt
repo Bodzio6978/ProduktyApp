@@ -1,6 +1,7 @@
 package com.gmail.bogumilmecel2.produkty.feature_items.presentation.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.gmail.bogumilmecel2.produkty.R
+import com.gmail.bogumilmecel2.produkty.common.presentation.ui.theme.Shapes
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
 
 @Composable
@@ -28,10 +30,12 @@ fun ItemLayout(
     val hasItemImage:Boolean? = item.image_link?.small?.isNotBlank()
 
     Card(
+        elevation = 8.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp, horizontal = 20.dp)
-            .clip(RoundedCornerShape(25))
+            .padding(vertical = 10.dp, horizontal = 20.dp),
+        shape = RoundedCornerShape(25)
+
     ) {
 
         Column(

@@ -34,7 +34,7 @@ interface ItemsApi {
     suspend fun refreshToken(
         @Query("client_secret") clientSecret: String = BuildConfig.CLIENT_SECRET,
         @Query("client_id") clientId: String = BuildConfig.CLIENT_ID,
-        @Query("grant_type") grantType: String = "refresh",
+        @Query("grant_type") grantType: String = "refresh_token",
         @Query("refresh_token") refreshToken: String
     )
 }

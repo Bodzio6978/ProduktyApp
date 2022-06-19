@@ -37,6 +37,7 @@ class ItemsRepositoryImp(
 
     override suspend fun refreshToken(refreshToken: String): Result {
         return try {
+            Log.e(TAG,refreshToken)
             itemsApi.refreshToken(
                 refreshToken = refreshToken
             )

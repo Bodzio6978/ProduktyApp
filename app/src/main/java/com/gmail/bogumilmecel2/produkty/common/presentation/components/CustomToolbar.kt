@@ -4,6 +4,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -17,7 +18,7 @@ fun CustomToolbar(
             Text(
                 text = title,
                 style = MaterialTheme.typography.h1,
-                color = MaterialTheme.colors.onBackground
+                color = Color.White
             )
         },
         contentColor = MaterialTheme.colors.background,
