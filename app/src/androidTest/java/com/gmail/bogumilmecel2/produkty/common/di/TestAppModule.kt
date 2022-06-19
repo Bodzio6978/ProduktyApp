@@ -2,12 +2,12 @@ package com.gmail.bogumilmecel2.produkty.common.di
 
 import android.app.Application
 import android.content.SharedPreferences
+import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
+import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.ComposeCustomNavigator
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
 import com.gmail.bogumilmecel2.produkty.common.util.Result
-import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
-import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
 import dagger.Module

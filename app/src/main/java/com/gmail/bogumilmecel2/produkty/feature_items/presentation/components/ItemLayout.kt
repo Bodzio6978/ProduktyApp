@@ -16,13 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.gmail.bogumilmecel2.produkty.R
-import androidx.compose.ui.unit.dp
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.ImageLink
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Price
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Tax
 
 @Composable
 fun ItemLayout(
@@ -47,20 +44,20 @@ fun ItemLayout(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                if (hasItemImage!=null) {
-                    Image(
-                        painter = rememberAsyncImagePainter(item.image_link.small),
-                        contentDescription = item.name,
-                        modifier = Modifier
-                            .size(64.dp)
-                            .clip(CircleShape)
-                    )
-
+                hasItemImage?.let {
+                    if (it){
+                        Image(
+                            painter = rememberAsyncImagePainter(item.image_link.small),
+                            contentDescription = item.name,
+                            modifier = Modifier
+                                .size(64.dp)
+                                .clip(CircleShape)
+                        )
+                    }
                 }
-
                 Column(
                     modifier = Modifier
-                        .padding(start = if (hasItemImage!=null) 10.dp else 0.dp)
+                        .padding(start = 10.dp)
                 ) {
 
                     Row(

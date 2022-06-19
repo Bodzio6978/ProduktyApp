@@ -1,14 +1,14 @@
 package com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases
 
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
+import com.gmail.bogumilmecel2.produkty.common.util.Result
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
-import org.junit.jupiter.api.Assertions.*
-import com.gmail.bogumilmecel2.produkty.common.util.Result
 import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito

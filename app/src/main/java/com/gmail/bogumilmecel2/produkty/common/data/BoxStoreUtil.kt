@@ -1,7 +1,6 @@
 package com.gmail.bogumilmecel2.produkty.common.data
 
 import android.app.Application
-import com.gmail.bogumilmecel2.produkty.ProduktyApp
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.object_box.MyObjectBox
 import io.objectbox.BoxStore
 

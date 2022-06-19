@@ -3,11 +3,11 @@ package com.gmail.bogumilmecel2.produkty.feature_login.data.repository
 import android.content.SharedPreferences
 import android.util.Log
 import com.gmail.bogumilmecel2.produkty.R
+import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
+import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
+import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
 import com.gmail.bogumilmecel2.produkty.common.util.Result
-import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
-import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
-import com.gmail.bogumilmecel2.produkty.common.util.Constants
 import com.gmail.bogumilmecel2.produkty.common.util.TAG
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.google.gson.Gson

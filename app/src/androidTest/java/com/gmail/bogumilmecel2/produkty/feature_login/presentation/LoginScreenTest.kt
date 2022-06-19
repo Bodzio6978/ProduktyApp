@@ -2,11 +2,11 @@ package com.gmail.bogumilmecel2.produkty.feature_login.presentation
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import com.gmail.bogumilmecel2.produkty.R
 import com.gmail.bogumilmecel2.produkty.common.di.AppModule
 import com.gmail.bogumilmecel2.produkty.common.navigation.NavHostGraph
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.presentation.MainActivity
-import com.gmail.bogumilmecel2.produkty.R
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules

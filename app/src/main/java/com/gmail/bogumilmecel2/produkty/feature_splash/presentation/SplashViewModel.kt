@@ -9,10 +9,10 @@ import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
 import com.gmail.bogumilmecel2.produkty.common.navigation.nav_actions.NavigationActions
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.Resource
-import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.ItemsUseCases
 import com.gmail.bogumilmecel2.produkty.common.util.Result
 import com.gmail.bogumilmecel2.produkty.common.util.TAG
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
+import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.ItemsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow

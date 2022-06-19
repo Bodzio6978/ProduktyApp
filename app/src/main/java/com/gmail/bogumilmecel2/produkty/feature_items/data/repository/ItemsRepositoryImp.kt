@@ -7,12 +7,9 @@ import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
 import com.gmail.bogumilmecel2.produkty.common.util.*
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Data
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.object_box.ObjectBoxItem
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.repository.ItemsRepository
 import com.google.gson.Gson
-import io.objectbox.Box
-import io.objectbox.BoxStore
 import retrofit2.HttpException
 
 class ItemsRepositoryImp(

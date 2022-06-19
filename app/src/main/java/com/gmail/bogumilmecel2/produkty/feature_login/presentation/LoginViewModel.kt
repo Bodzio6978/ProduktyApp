@@ -8,6 +8,7 @@ import com.gmail.bogumilmecel2.produkty.R
 import com.gmail.bogumilmecel2.produkty.common.navigation.nav_actions.NavigationActions
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
+import com.gmail.bogumilmecel2.produkty.common.util.Result
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases.LogIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.gmail.bogumilmecel2.produkty.common.util.Result
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(

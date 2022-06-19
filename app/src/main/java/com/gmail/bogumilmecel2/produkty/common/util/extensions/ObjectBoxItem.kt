@@ -9,7 +9,7 @@ fun ObjectBoxItem.toItem(): Item {
         category = if (this.category.isNotBlank()) Gson().fromJson(this.category,Category::class.java) else Category(),
         category_id = this.category_id,
         id = this.id.toInt(),
-        image_link = if (this.image_link?.isNotBlank() == false) Gson().fromJson(this.image_link,ImageLink::class.java) else ImageLink(),
+        image_link = if (this.image_link==null||this.image_link.isBlank()) null else Gson().fromJson(this.image_link,ImageLink::class.java),
         item_group_id = this.item_group_id,
         joint_id = this.joint_id,
         name = this.name,

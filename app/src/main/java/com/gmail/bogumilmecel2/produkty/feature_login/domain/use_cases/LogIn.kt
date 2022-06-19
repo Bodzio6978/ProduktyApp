@@ -1,12 +1,10 @@
 package com.gmail.bogumilmecel2.produkty.feature_login.domain.use_cases
 
-import android.util.Log
 import android.util.Patterns
 import com.gmail.bogumilmecel2.produkty.R
-import com.gmail.bogumilmecel2.produkty.common.util.Resource
 import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
-import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.gmail.bogumilmecel2.produkty.common.util.Result
+import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 
 class LogIn(
     private val loginRepository: LoginRepository,

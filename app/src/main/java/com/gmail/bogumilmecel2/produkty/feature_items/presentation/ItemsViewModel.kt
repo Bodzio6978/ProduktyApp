@@ -4,13 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.Resource
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Category
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.ImageLink
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.use_cases.GetBoxStoreItems
-import com.gmail.bogumilmecel2.produkty.feature_splash.domain.use_cases.ItemsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow

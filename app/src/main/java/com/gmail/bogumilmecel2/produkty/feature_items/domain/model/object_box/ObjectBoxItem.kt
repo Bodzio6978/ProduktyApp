@@ -1,9 +1,5 @@
 package com.gmail.bogumilmecel2.produkty.feature_items.domain.model.object_box
 
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Category
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.ImageLink
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Price
-import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Tax
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
