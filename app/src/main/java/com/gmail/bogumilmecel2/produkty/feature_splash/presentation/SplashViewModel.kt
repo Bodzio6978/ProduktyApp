@@ -5,10 +5,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gmail.bogumilmecel2.produkty.R
 import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
 import com.gmail.bogumilmecel2.produkty.common.navigation.nav_actions.NavigationActions
 import com.gmail.bogumilmecel2.produkty.common.navigation.navigator.Navigator
 import com.gmail.bogumilmecel2.produkty.common.util.Resource
+import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
 import com.gmail.bogumilmecel2.produkty.common.util.Result
 import com.gmail.bogumilmecel2.produkty.common.util.TAG
 import com.gmail.bogumilmecel2.produkty.feature_items.domain.model.Item
@@ -23,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val itemsUseCases: ItemsUseCases,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     private val _accessToken = MutableSharedFlow<AccessToken>()
@@ -52,14 +55,19 @@ class SplashViewModel @Inject constructor(
     private suspend fun getItems(accessToken: AccessToken) {
         val itemsResource = itemsUseCases.getItems(accessToken)
 
-        if (itemsResource is Resource.Success) {
-            Log.e(TAG,itemsResource.data.toString())
+        if (itemsResource is Resource.Error){
+            
+            val uiMessage = itemsResource.uiText!!
+
+            if (uiMessage == resourceProvider.getString(R.string.the_token_has_expired_or_is_incorrect)){
+                navigator.navigate(NavigationActions.SplashScreen.splashToLogin())
+            }else{
+                _splashState.value = SplashState.Error(itemsResource.uiText.toString())
+            }
+        }else{
             val items = itemsResource.data!!.data
             saveItems(items)
-        } else {
-            _splashState.value = SplashState.Error(itemsResource.uiText.toString())
         }
-
     }
 
     private suspend fun saveItems(items: List<Item>) {

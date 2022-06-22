@@ -16,7 +16,7 @@ class ItemsRepositoryImp(
     private val sharedPreferences: SharedPreferences,
     private val resourceProvider: ResourceProvider,
     private val itemsApi:ItemsApi,
-    private val boxStoreUtil: BoxStoreUtil
+    private val boxStoreUtil: BoxStoreUtil,
 ): ItemsRepository {
 
     override suspend fun getAccessToken(): Resource<AccessToken> {
