@@ -83,8 +83,15 @@ object AppModule {
     @Provides
     fun provideLogInUseCase(
         loginRepository: LoginRepository,
-        resourceProvider: ResourceProvider
-    ) = LogIn(loginRepository = loginRepository, resourceProvider = resourceProvider)
+        resourceProvider: ResourceProvider,
+        getItems: GetItems,
+        saveItemToObjectBox: SaveItemToObjectBox
+    ) = LogIn(
+        loginRepository = loginRepository,
+        resourceProvider = resourceProvider,
+        getItems = getItems,
+        saveItemToObjectBox = saveItemToObjectBox
+    )
 
     @Singleton
     @Provides
@@ -107,8 +114,22 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideItemsUseCases(
+    fun provideGetItemsUseCase(
         itemsRepository: ItemsRepository
+    ):GetItems = GetItems(itemsRepository = itemsRepository)
+
+    @Singleton
+    @Provides
+    fun provideSaveItemToObjectBoxUseCase(
+        itemsRepository: ItemsRepository
+    ):SaveItemToObjectBox = SaveItemToObjectBox(itemsRepository = itemsRepository)
+
+    @Singleton
+    @Provides
+    fun provideItemsUseCases(
+        itemsRepository: ItemsRepository,
+        getItems: GetItems,
+        saveItemToObjectBox: SaveItemToObjectBox
     ): ItemsUseCases = ItemsUseCases(
         getItems = GetItems(itemsRepository = itemsRepository),
         getAccessToken = GetAccessToken(itemsRepository = itemsRepository),

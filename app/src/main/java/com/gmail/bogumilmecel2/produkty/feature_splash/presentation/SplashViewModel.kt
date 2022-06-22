@@ -56,7 +56,7 @@ class SplashViewModel @Inject constructor(
         val itemsResource = itemsUseCases.getItems(accessToken)
 
         if (itemsResource is Resource.Error){
-            
+
             val uiMessage = itemsResource.uiText!!
 
             if (uiMessage == resourceProvider.getString(R.string.the_token_has_expired_or_is_incorrect)){

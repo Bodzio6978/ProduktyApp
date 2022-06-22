@@ -5,10 +5,7 @@ import android.util.Log
 import com.gmail.bogumilmecel2.produkty.R
 import com.gmail.bogumilmecel2.produkty.common.data.api.ItemsApi
 import com.gmail.bogumilmecel2.produkty.common.domain.model.AccessToken
-import com.gmail.bogumilmecel2.produkty.common.util.Constants
-import com.gmail.bogumilmecel2.produkty.common.util.ResourceProvider
-import com.gmail.bogumilmecel2.produkty.common.util.Result
-import com.gmail.bogumilmecel2.produkty.common.util.TAG
+import com.gmail.bogumilmecel2.produkty.common.util.*
 import com.gmail.bogumilmecel2.produkty.feature_login.domain.repository.LoginRepository
 import com.google.gson.Gson
 import retrofit2.HttpException
@@ -22,21 +19,26 @@ class LoginRepositoryImp(
     override suspend fun logIn(
         username: String,
         password: String
-    ): Result {
+    ): Resource<AccessToken> {
         return try {
             val accessToken = itemsApi.logInUser(
                 username = username,
                 password = password
             )
-            saveAccessToken(accessToken = accessToken)
+            val result = saveAccessToken(accessToken = accessToken)
+            if (result is Result.Error){
+                Resource.Error(result.message)
+            }else{
+                Resource.Success(accessToken)
+            }
         }catch (e:HttpException){
             if (e.code() == 401){
-                Result.Error(resourceProvider.getString(R.string.the_email_or_password_is_incorrect))
+                Resource.Error(resourceProvider.getString(R.string.the_email_or_password_is_incorrect))
             }else{
-                Result.Error(resourceProvider.getString(R.string.unknown_http_error))
+                Resource.Error(resourceProvider.getString(R.string.unknown_http_error))
             }
         }catch (e:Exception){
-            Result.Error(resourceProvider.getString(R.string.unknown_error))
+            Resource.Error(resourceProvider.getString(R.string.unknown_error))
         }
     }
 
